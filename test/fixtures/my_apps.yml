@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario_id: 
+  titulo: MyString
+  app_id: MyString
+  javascript_origins: MyString
+  secret_key: MyString
+
+two:
+  usuario_id: 
+  titulo: MyString
+  app_id: MyString
+  javascript_origins: MyString
+  secret_key: MyString

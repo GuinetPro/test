@@ -1,0 +1,33 @@
+<p class="alert alert-success" role="alert" style="<%= "display:none;" if notice.nil?  %>"><%= notice %></p>
+<p class="alert alert-danger" role="alert" style="<%= "display:none;" if alert.nil?  %>"><%= alert %></p> 
+
+<h1>Lista de Tipo Vehiculos</h1>
+
+<% if current_usuario.perfil == "admin"  %>
+<%= link_to "Nueva Tipo Vehiculos" , new_backoffice_tipovehiculo_path , :class => "btn btn-success"%>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipovehiculos.each do |tipovehiculo| %>
+      <tr>
+        <td><%= tipovehiculo.nombre %></td>
+        <% if current_usuario.perfil == "admin"  %>
+            <td><%= link_to 'Edit', edit_backoffice_tipovehiculo_path(tipovehiculo) %></td>
+            <td><%= link_to 'Eliminar', backoffice_tipovehiculo_path(tipovehiculo), method: :delete, data: { confirm: 'Realmente deseas eliminar este dato?' } %></td>
+        <% end %>
+        <% if current_usuario.perfil == "editor"  %>
+            <td><%= link_to 'Edit', edit_backoffice_tipovehiculo_path(tipovehiculo) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @tipovehiculos, :theme => 'twitter-bootstrap-3'%>
+<br>

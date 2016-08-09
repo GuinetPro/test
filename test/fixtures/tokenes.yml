@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  my_app_id: 
+  token: MyString
+  experies_at: 2016-07-31 17:55:44
+
+two:
+  my_app_id: 
+  token: MyString
+  experies_at: 2016-07-31 17:55:44

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seguroservice</title>
+    <%= favicon_link_tag 'favicon.png'%>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+	<%= render("nav") %>
+	
+	<div class="container" style="margin-top: 70px;">
+		<%= render("sidebar") %>
+		<div class="col-md-9 productos-filtrados">
+			<%= yield %>
+		</div>
+	</div>
+
+</body>
+</html>

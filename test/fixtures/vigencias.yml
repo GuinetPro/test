@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha_desde: 2016-07-28 19:43:12
+  fecha_hasta: 2016-07-28 19:43:12
+  nombre: MyString
+  activado: false
+  tipoVigencia_id: 
+  campana_id: 
+
+two:
+  fecha_desde: 2016-07-28 19:43:12
+  fecha_hasta: 2016-07-28 19:43:12
+  nombre: MyString
+  activado: false
+  tipoVigencia_id: 
+  campana_id: 

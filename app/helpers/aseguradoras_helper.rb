@@ -1,0 +1,2 @@
+module AseguradorasHelper
+end

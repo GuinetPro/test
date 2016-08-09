@@ -1,0 +1,288 @@
+<%= form_for ["backoffice",@producto] do |f| %>
+  <% if @producto.errors.any? %>
+    <div class="alert alert-warning">
+      <h2><%= pluralize(@producto.errors.count, "error") %> Al Intentar Guardar Producto:</h2>
+      <ul>
+      <% @producto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form-group" id="pre">
+    <div class="row">
+      <div class="col-md-10">
+        <%= f.label :precio %><br>
+        <%= f.number_field :precio,class: "form-control" %>    
+      </div>
+      <div class="col-md-2 label-padding">       
+        <button class="btn btn-success" onclick="agregarAtributo(event,'pre')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+
+    <br/>
+
+    <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @precioAtributo.each do |v|  %>     
+            <div class="row pre pre-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[pre][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[pre][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'pre',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+            <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+
+  </div>
+
+  <div class="form-group" id="compraAtributo">
+    <div class="row">
+      <div class="col-md-10">
+        <%= f.label :url_compra %><br>
+        <%= f.text_field :url_compra,class: "form-control" %>    
+      </div>
+      <div class="col-md-2 label-padding">       
+        <button class="btn btn-success" onclick="agregarAtributo(event,'compraAtributo')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <br/>
+
+    <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @compraAtributo.each do |v|  %>     
+            <div class="row compraAtributo compraAtributo-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[compraAtributo][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[compraAtributo][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'compraAtributo',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+          <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+
+  </div>
+
+
+  <div class="form-group" id="polizaAtributo">
+    <div class="row">
+      <div class="col-md-10">
+        <%= f.label :url_poliza %><br>
+        <%= f.text_field :url_poliza,class: "form-control" %>    
+      </div>
+      <div class="col-md-2 label-padding">       
+        <button class="btn btn-success" onclick="agregarAtributo(event,'polizaAtributo')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <br/>
+      <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @polizaAtributo.each do |v|  %>     
+            <div class="row polizaAtributo polizaAtributo-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[polizaAtributo][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[polizaAtributo][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'polizaAtributo',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+            <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+  </div>
+<br/>
+  <div class="form-group" id="tipovehiculoAtributo">
+    <div class="row">
+      <div class="col-md-10"> 
+      <%= f.select(:tipovehiculo_id, @tipovehiculo.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Tipo Vehiculo'}, { :class => 'form-control' })  %>   
+      </div>
+      <div class="col-md-2">       
+        <button class="btn btn-success" onclick="agregarAtributo(event,'tipovehiculoAtributo')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <br/>
+
+    <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @tipovehiculoAtributo.each do |v|  %>     
+            <div class="row tipovehiculoAtributo tipovehiculoAtributo-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[tipovehiculoAtributo][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[tipovehiculoAtributo][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'tipovehiculoAtributo',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+            <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+
+
+  </div>
+<br/>
+  <div class="form-group" id="tipoproductoAtributo">
+    <div class="row">
+      <div class="col-md-10"> 
+      <%= f.select(:tipoproducto_id, @tipoproducto.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Tipo Producto'}, { :class => 'form-control' })  %> 
+      </div>
+      <div class="col-md-2">       
+        <button class="btn btn-success" onclick="agregarAtributo(event,'tipoproductoAtributo')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <br/>
+
+    <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @tipoproductoAtributo.each do |v|  %>     
+            <div class="row tipoproductoAtributo tipoproductoAtributo-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[tipoproductoAtributo][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[tipoproductoAtributo][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'tipoproductoAtributo',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+            <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+
+  </div>
+<br/>
+  <div class="form-group" id="aseguradoraAtributo">
+    <div class="row">
+      <div class="col-md-10"> 
+       <%= f.select(:aseguradora_id, @aseguradora.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige una Aseguradora'}, { :class => 'form-control' })  %>
+      </div>
+      <div class="col-md-2">       
+        <button class="btn btn-success" onclick="agregarAtributo(event,'aseguradoraAtributo')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <br/>
+
+    <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @aseguradoraAtributo.each do |v|  %>     
+            <div class="row aseguradoraAtributo aseguradoraAtributo-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[aseguradoraAtributo][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[aseguradoraAtributo][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'aseguradoraAtributo',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+            <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+
+  </div>
+<br/>
+  <div class="form-group" id="destacadoAtributo">
+      <div class="row">
+        <div class="col-md-10"> 
+          <%= f.select(:destacado_id, @destacado.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Destacado'}, { :class => 'form-control' })  %>
+        </div>
+        <div class="col-md-2">       
+          <button class="btn btn-success" onclick="agregarAtributo(event,'destacadoAtributo')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <br/>
+
+    <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @destacadoAtributo.each do |v|  %>     
+            <div class="row destacadoAtributo destacadoAtributo-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[destacadoAtributo][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[destacadoAtributo][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'destacadoAtributo',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+            <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+  </div>
+
+
+<br/>
+  <div class="form-group" id="vigenciaAtributo">
+      <div class="row">
+        <div class="col-md-10"> 
+
+        <% if @producto.persisted? %>
+            <%= 
+            select_tag 'producto[vigencias]', options_for_select(@vigencia.collect{ |u| [u.tipovigencia.nombre+" ( "+ u.fecha_desde.strftime("%Y-%m-%d")+" hasta "+ u.fecha_hasta.strftime("%Y-%m-%d")+" )", u.id] },:selected => @producto.vigencias.collect{ |t| t.id }), {multiple:  true, class: 'form-control'}
+            %>
+
+        <% else %>
+          <%= 
+          select_tag 'producto[vigencias]', options_for_select(@vigencia.collect{ |u| [u.tipovigencia.nombre+" ( "+ u.fecha_desde.strftime("%Y-%m-%d")+" hasta "+ u.fecha_hasta.strftime("%Y-%m-%d")+" )", u.id] }),{multiple:  true, class: 'form-control'}  %>
+        <% end %>
+
+        </div>
+        <div class="col-md-2">       
+          <button class="btn btn-success" onclick="agregarAtributo(event,'vigenciaAtributo')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <br/>
+
+    <% if @producto.persisted? %>
+       <% contador = 0 %>
+       <% @vigenciaAtributo.each do |v|  %>     
+            <div class="row vigenciaAtributo vigenciaAtributo-row<%=contador%>">
+              <div class="col-md-3">
+                <input type="text" value="<%=v.llave%>" class="form-control" placeholder="llave" name="producto[vigenciaAtributo][llave][<%=contador%>]">
+              </div>
+              <div class="col-md-4">
+                <input type="text" value="<%=v.valor%>" class="form-control" placeholder="valor" name="producto[vigenciaAtributo][valor][<%=contador%>]">
+              </div>
+              <div class="col-md-2">
+                <button onclick="eliminarAtributo(event,'vigenciaAtributo',<%=contador%>)" class="btn btn-danger"><i class="fa fa fa-times" aria-hidden="true"></i></button>
+              </div> 
+            </div>
+            <% contador = contador + 1 %>
+       <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :activado %> Activado
+        </label>
+      </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block" %>
+  </div>
+<% end %>

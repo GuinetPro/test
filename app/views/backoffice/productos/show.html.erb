@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @producto.nombre %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @producto.precio %>
+</p>
+
+<p>
+  <strong>Activado:</strong>
+  <%= @producto.activado %>
+</p>
+
+<p>
+  <strong>Url compra:</strong>
+  <%= @producto.url_compra %>
+</p>
+
+<p>
+  <strong>Url poliza:</strong>
+  <%= @producto.url_poliza %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @producto.usuario %>
+</p>
+
+<p>
+  <strong>Tipovehiculo:</strong>
+  <%= @producto.tipovehiculo %>
+</p>
+
+<p>
+  <strong>Tipoproducto:</strong>
+  <%= @producto.tipoproducto %>
+</p>
+
+<p>
+  <strong>Aseguradora:</strong>
+  <%= @producto.aseguradora %>
+</p>
+
+<p>
+  <strong>Destacado:</strong>
+  <%= @producto.destacado %>
+</p>
+
+<%= link_to 'Edit', edit_producto_path(@producto) %> |
+<%= link_to 'Back', productos_path %>
