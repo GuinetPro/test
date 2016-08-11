@@ -1,0 +1,190 @@
+= form_for ["backoffice",@producto] do |f|
+  - if @producto.errors.any?
+    .alert.alert-warning
+      %h2
+        = pluralize(@producto.errors.count, "error")
+        Al Intentar Guardar Producto:
+      %ul
+        - @producto.errors.full_messages.each do |message|
+          %li= message
+  #pre.form-group
+    .row
+      .col-md-10
+        = f.label :precio
+        %br/
+        = f.number_field :precio,class: "form-control"
+      .col-md-2.label-padding
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'pre')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @precioAtributo.each do |v|
+        %div{:class => "row pre pre-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[pre][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[pre][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'pre',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  #compraAtributo.form-group
+    .row
+      .col-md-10
+        = f.label :url_compra
+        %br/
+        = f.text_field :url_compra,class: "form-control"
+      .col-md-2.label-padding
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'compraAtributo')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @compraAtributo.each do |v|
+        %div{:class => "row compraAtributo compraAtributo-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[compraAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[compraAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'compraAtributo',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  #polizaAtributo.form-group
+    .row
+      .col-md-10
+        = f.label :url_poliza
+        %br/
+        = f.text_field :url_poliza,class: "form-control"
+      .col-md-2.label-padding
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'polizaAtributo')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @polizaAtributo.each do |v|
+        %div{:class => "row polizaAtributo polizaAtributo-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[polizaAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[polizaAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'polizaAtributo',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  %br/
+  #tipovehiculoAtributo.form-group
+    .row
+      .col-md-10
+        = f.select(:tipovehiculo_id, @tipovehiculo.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Tipo Vehiculo'}, { :class => 'form-control' })
+      .col-md-2
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'tipovehiculoAtributo')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @tipovehiculoAtributo.each do |v|
+        %div{:class => "row tipovehiculoAtributo tipovehiculoAtributo-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[tipovehiculoAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[tipovehiculoAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'tipovehiculoAtributo',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  %br/
+  #tipoproductoAtributo.form-group
+    .row
+      .col-md-10
+        = f.select(:tipoproducto_id, @tipoproducto.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Tipo Producto'}, { :class => 'form-control' })
+      .col-md-2
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'tipoproductoAtributo')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @tipoproductoAtributo.each do |v|
+        %div{:class => "row tipoproductoAtributo tipoproductoAtributo-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[tipoproductoAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[tipoproductoAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'tipoproductoAtributo',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  %br/
+  #aseguradoraAtributo.form-group
+    .row
+      .col-md-10
+        = f.select(:aseguradora_id, @aseguradora.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige una Aseguradora'}, { :class => 'form-control' })
+      .col-md-2
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'aseguradoraAtributo')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @aseguradoraAtributo.each do |v|
+        %div{:class => "row aseguradoraAtributo aseguradoraAtributo-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[aseguradoraAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[aseguradoraAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'aseguradoraAtributo',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  %br/
+  #destacadoAtributo.form-group
+    .row
+      .col-md-10
+        = f.select(:destacado_id, @destacado.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Destacado'}, { :class => 'form-control' })
+      .col-md-2
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'destacadoAtributo')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @destacadoAtributo.each do |v|
+        %div{:class => "row destacadoAtributo destacadoAtributo-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[destacadoAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[destacadoAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'destacadoAtributo',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  %br/
+  #vigenciaAtributo.form-group
+    .row
+      .col-md-10
+        - if @producto.persisted?
+          = select_tag 'producto[vigencias]', options_for_select(@vigencia.collect{ |u| [u.tipovigencia.nombre+" ( "+ u.fecha_desde.strftime("%Y-%m-%d")+" hasta "+ u.fecha_hasta.strftime("%Y-%m-%d")+" )", u.id] },:selected => @producto.vigencias.collect{ |t| t.id }), {multiple:  true, class: 'form-control'}
+        - else
+          = select_tag 'producto[vigencias]', options_for_select(@vigencia.collect{ |u| [u.tipovigencia.nombre+" ( "+ u.fecha_desde.strftime("%Y-%m-%d")+" hasta "+ u.fecha_hasta.strftime("%Y-%m-%d")+" )", u.id] }),{multiple:  true, class: 'form-control'}
+      .col-md-2
+        %button.btn.btn-success{:onclick => "agregarAtributo(event,'vigenciaAtributo')"}
+          %i.fa.fa-plus{"aria-hidden" => "true"}
+    %br/
+    - if @producto.persisted?
+      - contador = 0
+      - @vigenciaAtributo.each do |v|
+        %div{:class => "row vigenciaAtributo vigenciaAtributo-row#{contador}"}
+          .col-md-3
+            %input.form-control{:name => "producto[vigenciaAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+          .col-md-4
+            %input.form-control{:name => "producto[vigenciaAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
+          .col-md-2
+            %button.btn.btn-danger{:onclick => "eliminarAtributo(event,'vigenciaAtributo',#{contador})"}
+              %i.fa.fa.fa-times{"aria-hidden" => "true"}
+        - contador = contador + 1
+  .form-group
+    .checkbox
+      %label
+        = f.check_box :activado
+        Activado
+  .form-group
+    = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"

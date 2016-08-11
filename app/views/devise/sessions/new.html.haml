@@ -1,0 +1,25 @@
+.login_wrapper
+  .animate.form.login_form
+    %section.login_content
+      %p.notice{:style => "#{"display:none;" if notice.nil?}"}= notice
+      %p.alert{:style => "#{"alert:none;" if notice.nil?}"}= alert
+      %h1 BackOffice
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .field
+          = f.label :rut
+          %br/
+          = f.text_field :rut, autofocus: true,class: "form-control"
+        .field
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: false,class: "form-control"
+        .field
+          = f.label :password
+          %br/
+          = f.password_field :password, autocomplete: "off" ,class: "form-control"
+        - if devise_mapping.rememberable?
+          .field
+            = f.check_box :remember_me
+            = f.label :remember_me, "Recordarme"
+        .form-group
+          = f.submit "Ingresar" ,class: "btn btn-success btn-lg btn-block"

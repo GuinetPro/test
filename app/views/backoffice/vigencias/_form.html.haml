@@ -1,0 +1,41 @@
+= form_for ["backoffice",@vigencia] do |f|
+  - if @vigencia.errors.any?
+    .alert.alert-warning
+      %h2
+        = pluralize(@vigencia.errors.count, "error")
+        Al Intentar Guardar Vigencia :
+      %ul
+        - @vigencia.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :fecha_desde
+    %br/
+    = f.text_field :fecha_desde ,class: "form-control date"
+  .form-group
+    = f.label :fecha_hasta
+    %br/
+    = f.text_field :fecha_hasta ,class: "form-control date"
+  .form-group
+    .checkbox
+      %label
+        = f.check_box :activado
+        Activado
+  .form-group
+    = f.select(:tipovigencia_id, @tipovigencia.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige una Vigencia'}, { :class => 'form-control' })
+  .form-group
+    = f.select(:campana_id, @campana.all.collect {|a| [a.nombre, a.id]} ,{multiple:  false,include_blank: 'Elige una Campa├▒a'}, { :class => 'form-control' })
+  .form-group
+    = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"
+:javascript
+  $('.date').datepicker({
+          
+          language: "es",
+          
+          calendarWeeks: true,
+          
+          autoclose: true,
+          
+          todayHighlight: true,
+  
+          format: "dd-mm-yyyy"
+      });

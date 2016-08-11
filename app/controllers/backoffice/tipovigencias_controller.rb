@@ -22,18 +22,7 @@ module Backoffice
     def edit
     end
 
-    def duplicate
-      @tipovigencia        = Tipovigencia.new()
-      @tipovigenciaCurrent = Tipovigencia.find(params[:id])
-      @tipovigencia.nombre = @tipovigenciaCurrent.nombre
-      respond_to do |format|
-        if @tipovigencia.save
-          format.html { redirect_to backoffice_tipovigencias_path, notice: 'Tipo vigencia clonada con exito.' }
-        else
-          format.html { render :new }
-        end
-      end
-    end
+
     
     # POST /tipos_vigencia
     # POST /tipos_vigencia.json

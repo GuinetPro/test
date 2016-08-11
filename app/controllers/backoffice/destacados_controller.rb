@@ -18,18 +18,6 @@ module Backoffice
       @destacado = Destacado.new
     end
 
-    def duplicate
-      @destacado        = Destacado.new()
-      @destacadoCurrent = Destacado.find(params[:id])
-      @destacado.nombre = @destacadoCurrent.nombre
-      respond_to do |format|
-        if @destacado.save
-          format.html { redirect_to backoffice_destacados_path, notice: 'Destacado clonada con exito.' }
-        else
-          format.html { render :new }
-        end
-      end
-    end
     
     # GET /destacados/1/edit
     def edit

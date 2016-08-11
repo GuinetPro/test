@@ -22,18 +22,7 @@ module Backoffice
     def edit
     end
 
-    def duplicate
-      @campana        = Campana.new()
-      @campanaCurrent = Campana.find(params[:id])
-      @campana.nombre = @campanaCurrent.nombre
-      respond_to do |format|
-        if @campana.save
-          format.html { redirect_to backoffice_campanas_path, notice: 'Campana clonada con exito.' }
-        else
-          format.html { render :new }
-        end
-      end
-    end
+
 
     # POST /campanas
     # POST /campanas.json

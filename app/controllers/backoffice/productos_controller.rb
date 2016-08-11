@@ -4,12 +4,18 @@ module Backoffice
     before_action :load_Selectores, only: [:new,:edit,:update,:create]
     before_action :carga_AtributosGuardados, only: [:edit,:update]
 
-
-
     # GET /productos
     # GET /productos.json
     def index
       @productos = Producto.page(params[:page]).per(10) 
+      @proExcel = Producto.all
+      # damos la posibildiad segun formato por request
+      # entregar html o csv o xls
+      respond_to do |format|
+        format.html
+        format.csv { send_data @proExcel.to_csv }
+        format.xls
+      end
     end
 
     def search
@@ -74,10 +80,9 @@ module Backoffice
     # POST /productos.json
     def create
 
-      @producto = Producto.new(producto_params)
-      @producto.usuario_id = current_usuario.id
+      @producto                       = Producto.new(producto_params)
+      @producto.usuario_id            = current_usuario.id
       @producto.vigencias             = params[:producto][:vigencias]
-
       @producto.pre                   = params[:producto][:pre]
       @producto.compraAtributo        = params[:producto][:compraAtributo]
       @producto.polizaAtributo        = params[:producto][:polizaAtributo]
@@ -87,7 +92,6 @@ module Backoffice
       @producto.destacadoAtributo     = params[:producto][:destacadoAtributo]
       @producto.vigenciaAtributo      = params[:producto][:vigenciaAtributo]
       
-
 
       respond_to do |format|
         if @producto.save
@@ -157,16 +161,16 @@ module Backoffice
         @vigencia      = Vigencia.where( activado: true)
       end
 
-
+      #Cargamos los atributos que fueron guardados para desoplegarse en al vista
       def carga_AtributosGuardados
-              @precioAtributo       = Atributo.where(producto_id: @producto.id,campo: "precio" )
-              @compraAtributo       = Atributo.where(producto_id: @producto.id,campo: "compra" )
-              @polizaAtributo       = Atributo.where(producto_id: @producto.id,campo: "poliza" )
-              @tipovehiculoAtributo = Atributo.where(producto_id: @producto.id,campo: "tipovehiculo" )
-              @tipoproductoAtributo = Atributo.where(producto_id: @producto.id,campo: "tipoproducto" )
-              @aseguradoraAtributo  = Atributo.where(producto_id: @producto.id,campo: "aseguradora" )
-              @destacadoAtributo    = Atributo.where(producto_id: @producto.id,campo: "destacado" )
-              @vigenciaAtributo     = Atributo.where(producto_id: @producto.id,campo: "vigencia" )
+          @precioAtributo       = Atributo.where(producto_id: @producto.id,campo: "precio" )
+          @compraAtributo       = Atributo.where(producto_id: @producto.id,campo: "compra" )
+          @polizaAtributo       = Atributo.where(producto_id: @producto.id,campo: "poliza" )
+          @tipovehiculoAtributo = Atributo.where(producto_id: @producto.id,campo: "tipovehiculo" )
+          @tipoproductoAtributo = Atributo.where(producto_id: @producto.id,campo: "tipoproducto" )
+          @aseguradoraAtributo  = Atributo.where(producto_id: @producto.id,campo: "aseguradora" )
+          @destacadoAtributo    = Atributo.where(producto_id: @producto.id,campo: "destacado" )
+          @vigenciaAtributo     = Atributo.where(producto_id: @producto.id,campo: "vigencia" )
       end
   end
 end

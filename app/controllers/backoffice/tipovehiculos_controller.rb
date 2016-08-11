@@ -55,10 +55,12 @@ module Backoffice
     # DELETE /tipovehiculos/1
     # DELETE /tipovehiculos/1.json
     def destroy
-      @tipovehiculo.destroy
       respond_to do |format|
-        format.html { redirect_to backoffice_tipovehiculos_path, notice: 'Tipovehiculo eliminada con exito.' }
-        format.json { head :no_content }
+          if @tipovehiculo.destroy
+            format.html { redirect_to backoffice_tipovehiculos_path, notice: 'Tipovehiculo eliminada con exito.' }
+          else
+            format.html { redirect_to backoffice_tipovehiculos_path, alert: 'Error al eliminar Tipovehiculo asociada a un Producto.' }
+          end
       end
     end
 

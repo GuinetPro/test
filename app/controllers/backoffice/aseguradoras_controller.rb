@@ -55,10 +55,12 @@ module Backoffice
     # DELETE /aseguradoras/1
     # DELETE /aseguradoras/1.json
     def destroy
-      @aseguradora.destroy
       respond_to do |format|
-        format.html { redirect_to backoffice_aseguradoras_path, notice: 'Aseguradora eliminada con exito.' }
-        format.json { head :no_content }
+          if @aseguradora.destroy
+            format.html { redirect_to backoffice_aseguradoras_path, notice: 'Aseguradora eliminada con exito.' }
+          else
+            format.html { redirect_to backoffice_aseguradoras_path, alert: 'Error al eliminar Aseguradora asociada a un Producto.' }
+          end
       end
     end
 

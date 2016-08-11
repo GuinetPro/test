@@ -1,0 +1,21 @@
+= form_for ["backoffice",@aseguradora], html: { multipart: true }  do |f|
+  - if @aseguradora.errors.any?
+    .alert.alert-warning
+      %h2
+        = pluralize(@aseguradora.errors.count, "error")
+        Al Intentar Guardar Aseguradora f:
+      %ul
+        - @aseguradora.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre ,class: "form-control"
+  .form-group
+    = f.label :foto
+    %br/
+    = f.file_field :foto
+    - if !@aseguradora.foto.nil?
+      = image_tag @aseguradora.foto.thumb.url
+  .form-group
+    = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"

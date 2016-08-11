@@ -1,0 +1,7 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @destacado.nombre
+= link_to 'Edit', edit_destacado_path(@destacado)
+|
+= link_to 'Back', destacados_path

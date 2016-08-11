@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Usuario:
+  = @my_app.usuario
+%p
+  %strong Titulo:
+  = @my_app.titulo
+%p
+  %strong App:
+  = @my_app.app_id
+%p
+  %strong Javascript origins:
+  = @my_app.javascript_origins
+%p
+  %strong Secret key:
+  = @my_app.secret_key
+= link_to 'Edit', edit_my_app_path(@my_app)
+|
+= link_to 'Back', my_apps_path

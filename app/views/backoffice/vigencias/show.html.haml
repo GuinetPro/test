@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Fecha desde:
+  = @vigencia.fecha_desde
+%p
+  %strong Fecha hasta:
+  = @vigencia.fecha_hasta
+%p
+  %strong Nombre:
+  = @vigencia.nombre
+%p
+  %strong Activado:
+  = @vigencia.activado
+%p
+  %strong Tipovigencia:
+  = @vigencia.tipovigencia.nombre
+%p
+  %strong Campana:
+  = @vigencia.campana.nombre
+= link_to 'Edit', edit_vigencia_path(@vigencia)
+|
+= link_to 'Back', vigencias_path

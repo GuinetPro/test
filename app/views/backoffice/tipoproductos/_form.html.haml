@@ -1,0 +1,15 @@
+= form_for ["backoffice",@tipoproducto] do |f|
+  - if @tipoproducto.errors.any?
+    .alert.alert-warning
+      %h2
+        = pluralize(@tipoproducto.errors.count, "error")
+        Al Intentar Guardar Tipo Producto:
+      %ul
+        - @tipoproducto.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre ,class: "form-control"
+  .form-group
+    = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"

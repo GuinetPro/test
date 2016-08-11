@@ -47,7 +47,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
-
+# gemas propias para la aplicacion
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
@@ -56,3 +56,4 @@ gem 'bootstrap-kaminari-views'
 gem 'carrierwave', '~> 0.11.2'
 gem 'mini_magick'
 gem 'hirb'
+gem "haml-rails", "~> 0.9"

@@ -1,0 +1,51 @@
+%p.alert.alert-success{:role => "alert", :style => "#{"display:none;" if notice.nil?}"}= notice
+%p.alert.alert-danger{:role => "alert", :style => "#{"display:none;" if alert.nil?}"}= alert
+%h1 Listar Mis Apps
+- if current_usuario.perfil == "admin"
+  = link_to "Nueva App" , new_backoffice_my_app_path , :class => "btn btn-success"
+%table.table
+  %thead
+    %tr
+      %th Titulo
+      %th App ID
+      %th Javascript origins
+      %th Secret key
+      %th{:colspan => "2"}
+  %tbody
+    - @my_apps.each do |my_app|
+      %tr
+        %td= my_app.titulo
+        %td= my_app.app_id
+        %td= my_app.javascript_origins
+        %td= my_app.secret_key
+        - if current_usuario.perfil == "admin"
+          %td= link_to 'Edit', edit_backoffice_my_app_path(my_app)
+          %td= link_to 'Eliminar', backoffice_my_app_path(my_app), method: :delete, data: { confirm: 'Realmente deseas eliminar este dato?' }
+        - if current_usuario.perfil == "editor"
+          %td= link_to 'Edit', edit_backoffice_my_app_path(my_app)
+= paginate @my_apps, :theme => 'twitter-bootstrap-3'
+%hr/
+%h3 URL del Recurso
+%p 
+  = "http://#{request.host}#{api_v1_productos_path}.json (añadir el puerto si es necesario)" 
+%h3 Parametros
+%table.table
+  %tbody
+    %tr
+      %td 
+        %p app_id
+        %p String
+      %td
+        %p El valor del App ID creado
+    %tr
+      %td 
+        %p producto
+        %p Int
+      %td
+        %p Es el ID del Tipo de Producto 
+    %tr
+      %td 
+        %p vehiculo
+        %p Int
+      %td
+        %p Es el ID del Tipo de Vehiculo

@@ -1,0 +1,47 @@
+.col-md-3.filtros
+  .btn-group
+    = link_to "PRODUCTOS" , backoffice_productos_path , :class => "btn btn-default"
+    %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+      %span.caret
+      %span.sr-only Toggle Dropdown
+    %ul.dropdown-menu
+      - Tipoproducto.all.each do |t|
+        %li
+          = link_to t.nombre, {:controller => "backoffice/productos", :action => "search", :id => t.id }
+  / btn-group
+  .btn-group
+    = link_to "TIPOS DE PRODUCTOS" , backoffice_tipoproductos_path , :class => "btn btn-default"
+  / btn-group
+  .btn-group
+    = link_to "TIPOS DE VEHICULOS" , backoffice_tipovehiculos_path , :class => "btn btn-default"
+  / btn-group
+  .btn-group
+    = link_to "ASEGURADORAS" , backoffice_aseguradoras_path , :class => "btn btn-default"
+  / btn-group
+  .btn-group
+    = link_to "VIGENCIAS" , backoffice_vigencias_path , :class => "btn btn-default"
+    %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+      %span.caret
+      %span.sr-only Toggle Dropdown
+    %ul.dropdown-menu
+      - Tipovigencia.all.each do |t|
+        %li
+          = link_to t.nombre, {:controller => "backoffice/vigencias", :action => "search", :id => t.id }
+  / btn-group
+  .btn-group
+    = link_to "CAMPAÑAS" , backoffice_campanas_path , :class => "btn btn-default"
+  / btn-group
+  .btn-group
+    = link_to "TIPO DE VIGENCIAS" , backoffice_tipovigencias_path , :class => "btn btn-default"
+  / btn-group
+  .btn-group
+    = link_to "DESTACADOS" , backoffice_destacados_path , :class => "btn btn-default"
+  / btn-group
+  .btn-group
+    = link_to "MIS APLICACIONES" , backoffice_my_apps_path , :class => "btn btn-default"
+  / btn-group
+  - if current_usuario.perfil == "admin"
+    .btn-group
+      = link_to "USUARIOS" , backoffice_usuarios_path , :class => "btn btn-default"
+    / btn-group
+/ col-md-3

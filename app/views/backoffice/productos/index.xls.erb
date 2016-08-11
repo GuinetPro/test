@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+     <Table x:FullColumns="1" x:FullRows="1">
+      <Row>
+        <Cell><Data ss:Type="String">Precio</Data></Cell>
+        <Cell><Data ss:Type="String">Activado</Data></Cell>
+        <Cell><Data ss:Type="String">Vigencia</Data></Cell>
+        <Cell><Data ss:Type="String">Vehiculo</Data></Cell>
+        <Cell><Data ss:Type="String">Producto</Data></Cell>
+        <Cell><Data ss:Type="String">Aseguradora</Data></Cell>
+      </Row>
+    <% @proExcel.each do |producto| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= producto.precio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= (producto.activado) ? "Si" : "No" %> </Data></Cell>
+        <Cell><Data ss:Type="String"><% producto.vigencias.each do |vi| %><%= vi.tipovigencia.nombre %><% end %> </Data></Cell>
+        <Cell><Data ss:Type="String"><%= producto.tipovehiculo.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= producto.tipoproducto.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= producto.aseguradora.nombre %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

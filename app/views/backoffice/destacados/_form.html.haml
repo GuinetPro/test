@@ -1,0 +1,15 @@
+= form_for ["backoffice",@destacado] do |f|
+  - if @destacado.errors.any?
+    .alert.alert-warning
+      %h2
+        = pluralize(@destacado.errors.count, "error")
+        Al Intentar Guardar Destacado:
+      %ul
+        - @destacado.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre ,class: "form-control"
+  .form-group
+    = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"

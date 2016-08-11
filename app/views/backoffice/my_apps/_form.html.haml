@@ -1,0 +1,19 @@
+= form_for ["backoffice",@my_app] do |f|
+  - if @my_app.errors.any?
+    .alert.alert-warning
+      %h2
+        = pluralize(@my_app.errors.count, "error")
+        Al Intentar Guardar My App:
+      %ul
+        - @my_app.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :titulo
+    %br/
+    = f.text_field :titulo  ,class: "form-control"
+  .form-group
+    = f.label :javascript_origins
+    %br/
+    = f.text_field :javascript_origins  ,class: "form-control"
+  .form-group
+    = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"

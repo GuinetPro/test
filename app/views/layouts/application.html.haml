@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Seguroservice
+    = favicon_link_tag 'favicon.png'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    = render("nav")
+    .container{:style => "margin-top: 70px;"}
+      = render("sidebar")
+      .col-md-9.productos-filtrados
+        = yield
