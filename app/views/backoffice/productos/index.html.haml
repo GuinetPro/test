@@ -12,6 +12,7 @@
     %tr
       %th Precio
       %th Activado
+      %th Destacado
       %th Vigencia
       %th Vehiculo
       %th Producto
@@ -21,6 +22,8 @@
     - @productos.each do |producto|
       %tr
         %td= producto.precio
+        %td
+          = (producto.destacado_id) ? "Si" : "No"
         %td
           = (producto.activado) ? "Si" : "No"
         %td

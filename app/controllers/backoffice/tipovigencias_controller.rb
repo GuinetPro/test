@@ -57,10 +57,13 @@ module Backoffice
     # DELETE /tipos_vigencia/1
     # DELETE /tipos_vigencia/1.json
     def destroy
-      @tipovigencia.destroy
+
       respond_to do |format|
-        format.html { redirect_to backoffice_tipovigencias_path, notice: 'Tipo vigencia eliminada con exito.' }
-        format.json { head :no_content }
+          if @tipovigencia.destroy
+            format.html { redirect_to backoffice_tipovigencias_path, notice: 'Tipo vigencia eliminada con exito.' }
+          else
+            format.html { redirect_to backoffice_tipovigencias_path, alert: 'Error al eliminar Tipo vigencia asociada a una Vigencia.' }
+          end
       end
     end
 

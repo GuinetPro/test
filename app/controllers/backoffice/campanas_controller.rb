@@ -57,10 +57,13 @@ module Backoffice
     # DELETE /campanas/1
     # DELETE /campanas/1.json
     def destroy
-      @campana.destroy
+
       respond_to do |format|
-        format.html { redirect_to backoffice_campanas_path, notice: 'Campana eliminada con exito.' }
-        format.json { head :no_content }
+          if @campana.destroy
+            format.html { redirect_to backoffice_campanas_path, notice: 'Campana eliminada con exito.' }
+          else
+            format.html { redirect_to backoffice_campanas_path, alert: 'Error al eliminar Campana asociada a una Vigencia.' }
+          end
       end
     end
 

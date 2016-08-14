@@ -23,7 +23,7 @@
   .form-group
     = f.select(:tipovigencia_id, @tipovigencia.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige una Vigencia'}, { :class => 'form-control' })
   .form-group
-    = f.select(:campana_id, @campana.all.collect {|a| [a.nombre, a.id]} ,{multiple:  false,include_blank: 'Elige una Campa├▒a'}, { :class => 'form-control' })
+    = f.select(:campana_id, @campana.all.collect {|a| [a.nombre, a.id]} ,{multiple:  false,include_blank: 'Elige una Campaña'}, { :class => 'form-control' })
   .form-group
     = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"
 :javascript

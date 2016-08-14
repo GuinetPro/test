@@ -1,9 +1,18 @@
+u = Usuario.new(:email => "ricardo@guinet.cl", :password => 'ricardo', :password_confirmation => 'ricardo', :perfil=>'admin',:rut=>'15431464-4')
+u.save
+
+
+rake db:schema:load
+
+
 111111111-1
 editor@editor.cl
-editor
 editor
 
 111111111-2
 lector@lector.cl
 lector
 lector
+orm 
+
+index de producto ñadir un buscador por tipo de vehiculo y aseguradora
