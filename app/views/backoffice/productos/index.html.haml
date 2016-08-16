@@ -7,40 +7,6 @@
   \#{link_to "Excel", backoffice_productos_path(format: "xls")}
 - if current_usuario.perfil == "admin"
   = link_to "Nuevo Producto" , new_backoffice_producto_path , :class => "btn btn-success"
-%table.table
-  %thead
-    %tr
-      %th Precio
-      %th Activado
-      %th Destacado
-      %th Vigencia
-      %th Vehiculo
-      %th Producto
-      %th Aseguradora
-      %th{:colspan => "2"}
-  %tbody
-    - @productos.each do |producto|
-      %tr
-        %td= producto.precio
-        %td
-          = (producto.destacado_id) ? "Si" : "No"
-        %td
-          = (producto.activado) ? "Si" : "No"
-        %td
-          - producto.vigencias.each do |vi|
-            = vi.tipovigencia.nombre+" ( "+ vi.fecha_desde.strftime("%Y-%m-%d")+" hasta "+ vi.fecha_hasta.strftime("%Y-%m-%d")+" )"
-        %td= producto.tipovehiculo.nombre
-        %td= producto.tipoproducto.nombre
-        %td= producto.aseguradora.nombre
-        - if current_usuario.perfil == "admin"
-          %td
-            = link_to 'Editar', edit_backoffice_producto_path(producto)
-          %td
-            = link_to 'Eliminar', backoffice_producto_path(producto), method: :delete, data: { confirm: 'Realmente deseas eliminar este dato?' }
-          %td
-            = link_to "Clonar", {:controller => "backoffice/productos", :action => "duplicate", :id => producto.id }
-        - if current_usuario.perfil == "editor"
-          %td
-            = link_to 'Editar', edit_backoffice_producto_path(producto)
-= paginate @productos, :theme => 'twitter-bootstrap-3'
-%br/
+%div{"ng-app" => "MyApp"}
+  %div{"ng-controller" => "ListadoCtrl"}
+    %div{"ui-grid-pagination " =>"","id"=>"grid1" ,"ui-grid"=>"gridOptions" ,"ui-grid-edit"=>"", "ui-grid-cellNav"=>"", "class"=>"grid"}

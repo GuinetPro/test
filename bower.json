@@ -1,0 +1,18 @@
+{
+  "name": "seg",
+  "homepage": "https://github.com/GuinetPro/seg",
+  "authors": [
+    "Ricardo G <ricardo@guinet.cl>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ]
+}

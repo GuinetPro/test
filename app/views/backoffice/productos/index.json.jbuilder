@@ -1,4 +1,21 @@
-json.array!(@productos) do |producto|
-  json.extract! producto, :id, :nombre, :precio, :activado, :url_compra, :url_poliza, :usuario_id, :tipovehiculo_id, :tipoproducto_id, :aseguradora_id, :destacado_id
-  json.url backoffice_producto_url(producto, format: :json)
+json.array!(@productos) do |pro|
+    json.type "Productos"
+    json.id pro.id
+	  json.url_compra pro.url_compra
+  	json.precio pro.precio
+    json.activado pro.activado
+  	json.url_poliza pro.url_poliza
+	  json.tipovehiculo  pro.tipovehiculo.nombre
+	  json.tipoproducto  pro.tipoproducto.nombre
+	  json.aseguradora  pro.aseguradora.nombre
+	  json.aseguradora_imagen  root_url+pro.aseguradora.foto.seguro.url
+    if pro.destacado
+      json.destacado  pro.destacado.nombre
+    end
+      
+  	json.vigencia pro.vigencias pro.atributo do |v|
+      json.campana Campana.find(v.campana_id).nombre
+      json.vigencia Tipovigencia.find(v.tipovigencia_id).nombre
+    end
+    
 end

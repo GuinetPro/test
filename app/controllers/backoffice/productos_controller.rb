@@ -15,6 +15,7 @@ module Backoffice
         format.html
         format.csv { send_data @proExcel.to_csv }
         format.xls
+        format.json { render :index }
       end
     end
 
