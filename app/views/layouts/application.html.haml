@@ -5,7 +5,8 @@
     %title Seguroservice
     = favicon_link_tag 'favicon.png'
     :javascript
-       ProPAth = '"#{backoffice_productos_path}"' 
+       Perfil = "#{current_usuario.perfil}"
+       isEditor = (Perfil == 'editor')?true:false
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true

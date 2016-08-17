@@ -19,7 +19,7 @@ app.controller('ListadoCtrl', function ($scope,$http) {
     $scope.gridOptions.paginationPageSize = 20,
 
      //$scope.gridOptions.data =   $scope.myData ;
-
+console.log(isEditor);
     $scope.gridOptions.enableFiltering= true;
 
     $scope.gridOptions.enableCellEditOnFocus = true ;
@@ -36,40 +36,24 @@ app.controller('ListadoCtrl', function ($scope,$http) {
             enableFiltering: false,
             enableCellEdit: false,
             width: '20%',
-             cellTemplate:'<a href="#" ng-click="grid.appScope.buttonEdit(row.entity.id)">Editar</a>  <a data-confirm="Realmente deseas eliminar este dato?" rel="nofollow" data-method="delete" href="/backoffice/productos/9">Eliminar</a>  <a  href="#" ng-click="grid.appScope.buttonClonar(row.entity.id)">Clonar</a>' 
+            cellTemplate:( Perfil == "admin" )?'<a  href="productos/{{row.entity.url}}/edit">Editar</a>  <a data-confirm="Realmente deseas eliminar este dato?" rel="nofollow" data-method="delete" href="/backoffice/productos/{{row.entity.id}}">Eliminar</a>  <a  href="productos/duplicate/{{row.entity.id}}">Clonar</a>':'<a ng-show="'+isEditor+'" href="productos/{{row.entity.url}}/edit">Editar</a>' 
          },
        ];
 
 
 
-    $scope.buttonEdit = function(value) {
-        //alert('Name: ' + value);
-        window.location = "productos/"+value+"/edit";
-
-    };
-
-    $scope.buttonClonar = function(value) {
-        //alert('Name: ' + value);
-        window.location = "productos/duplicate/"+value;
-
-    };
-
-
      // buscamos los resultados
-     $http.get('http://localhost:3000/backoffice/productos.json')
+    $http.get('/backoffice/productos.json')
         .success(function(response) {
 
+        for(i = 0; i < response.length; i++){
+     	   response[i].activado = (response[i].activado)?"Si":"No";	
+           response[i].campana  = response[i].vigencia[0].campana;
+           response[i].vigencia = response[i].vigencia[0].vigencia;
+        }
 
-           for(i = 0; i < response.length; i++){
-
-     		   response[i].activado= (response[i].activado)?"Si":"No";	
-               response[i].campana= response[i].vigencia[0].campana  ;
-               response[i].vigencia= response[i].vigencia[0].vigencia  ;
-
-            }
-
-            $scope.gridOptions.data = response;          
-        });
+       $scope.gridOptions.data = response;          
+    });
 
     $scope.gridOptions.onRegisterApi = function(gridApi) {
 
@@ -82,10 +66,6 @@ app.controller('ListadoCtrl', function ($scope,$http) {
         });
 
       };
-
-
-
-
 
     $scope.buttonClick = function(value) {
         //alert('Name: ' + value);
