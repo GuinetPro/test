@@ -12,4 +12,14 @@ class Vigencia < ActiveRecord::Base
   validates :tipovigencia, presence: true
   validates :campana, presence: true
 
+  before_destroy :validate_relation?
+
+
+   private
+
+   def validate_relation?
+      Producto.joins("INNER JOIN tienevigencias  ON tienevigencias.producto_id = productos.id ")
+      			.where("tienevigencias.vigencia_id = ?",self.id ).empty?  
+   end
+
 end

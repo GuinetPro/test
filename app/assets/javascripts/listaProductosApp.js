@@ -36,7 +36,7 @@ console.log(isEditor);
             enableFiltering: false,
             enableCellEdit: false,
             width: '20%',
-            cellTemplate:( Perfil == "admin" )?'<a  href="productos/{{row.entity.url}}/edit">Editar</a>  <a data-confirm="Realmente deseas eliminar este dato?" rel="nofollow" data-method="delete" href="/backoffice/productos/{{row.entity.id}}">Eliminar</a>  <a  href="productos/duplicate/{{row.entity.id}}">Clonar</a>':'<a ng-show="'+isEditor+'" href="productos/{{row.entity.url}}/edit">Editar</a>' 
+            cellTemplate:( Perfil == "admin" )?'<a  href="/backoffice/productos/{{row.entity.id}}/edit">Editar</a>  <a data-confirm="Realmente deseas eliminar este dato?" rel="nofollow" data-method="delete" href="/backoffice/productos/{{row.entity.id}}">Eliminar</a>  <a  href="productos/duplicate/{{row.entity.id}}">Clonar</a>':'<a ng-show="'+isEditor+'" href="productos/{{row.entity.url}}/edit">Editar</a>' 
          },
        ];
 

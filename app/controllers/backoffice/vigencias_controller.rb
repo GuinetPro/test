@@ -63,10 +63,13 @@ module Backoffice
     # DELETE /vigencias/1
     # DELETE /vigencias/1.json
     def destroy
-      @vigencia.destroy
+
       respond_to do |format|
-        format.html { redirect_to backoffice_vigencias_path, notice: 'Vigencia eliminada con exito.' }
-        format.json { head :no_content }
+          if @vigencia.destroy
+            format.html { redirect_to backoffice_vigencias_path, notice: 'Vigencia eliminada con exito.' }
+          else
+            format.html { redirect_to backoffice_vigencias_path, alert: 'Error al eliminar Vigencia asociada a un Producto.' }
+          end
       end
     end
 

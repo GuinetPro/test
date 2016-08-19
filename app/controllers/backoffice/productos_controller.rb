@@ -29,6 +29,7 @@ module Backoffice
       @productosCurrent = Producto.find(params[:id])
       
       @productos.precio          = @productosCurrent.precio
+      @productos.usuario_id       = current_usuario.id
       @productos.url_compra      = @productosCurrent.url_compra
       @productos.url_poliza      = @productosCurrent.url_poliza
       @productos.tipovehiculo_id = @productosCurrent.tipovehiculo_id

@@ -16,3 +16,55 @@ lector
 orm 
 
 index de producto ñadir un buscador por tipo de vehiculo y aseguradora
+
+*** Subir a DigitalOcean *****
+
+
+https://www.youtube.com/watch?v=-6RH0SuC_lY
+
+1- crear ssh key
+
+2- ssh root@ip
+
+3- cd ~rails
+   ls
+   git clone seg y dento d seg
+   cp ~rails/rails_proyect/config/database.yml config/
+   nano config/database.yml (rails_proyect remplazar por seguro_service)
+   nano gemfile (añadir gem 'unicorn'  gem 'pg', '0.17.1')
+   bundle install
+
+   ** Configurar unicorn ** 
+
+   nano /etc/default/unicorn
+   APP_ROOT /seg
+
+   nano /etc/unicorn.conf
+   cambiar por /seg
+
+   ** Configurar nginx ** 
+   
+   nano /etc/nginx/sites-enabled/rails
+   reemplazar por seg en evz de rails_proyect
+
+   source /etc/default/unicorn
+   RAILS_ENV = production rake db:create db:migrate assets:precompile
+
+
+   ** Reseteamos ** 
+
+   service unicorn restart
+   service nginx reload
+
+
+  ** RESPUESTA SOBRE PDF ***
+
+  Hola Ricardo,
+
+Phpdocx no incluye métodos para reducir el peso de archivos PDF. Quizás podrías considerar reducir la calidad de las imágenes antes de añadirlas (por ejemplo mediante PHP GD o PHP ImageMagick) o reducir el tamaño del PDF resultante con una herramienta externa:
+
+http://askubuntu.com/questions/113544/how-can-i-reduce-the-file-size-of-a-scanned-pdf-file
+
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEApi2ej0BVc0xZfqQrWagYVCjZKPGFY8MCEiljmdL4CRT/NHiNm6jWuSmYAQdVP2pGJ7x3ltUXZlSfDkfZFZsQQDrHhfTNgdd72SFxgAzi5PX+QMLw0i9oTF7416E5pkGUA6dQebRSBarFzzHF3tug4zA8pi275P+shZdMcBsuafsaKgdpPe0tFANVSFYyaHlNH9BYwRDRPXGiElf5czwxu+fA7YBhbbE+PcHzngnPlNVf5kAIJxJWXuvbu6rZwBp0QibY380kYI7RursZK80zQXReovD5ab4H9YCMYlGORKHQu295gmOVNtrPJ5fQRG3xP7+dXaKTSLANoa53S/I9Ww== rsa-key-20160819

@@ -37,8 +37,20 @@ module Backoffice
 	    # PATCH/PUT /tipos_vigencia/1
 	    # PATCH/PUT /tipos_vigencia/1.json
 	    def update
+
+	      # si no se envia password ni de confirmacion lo eliminamos de los
+	      # parametros enviados
+	      if usuario_params[:password].blank?
+		      usuario_params.delete(:password)
+		      usuario_params.delete(:password_confirmation)
+		  end
+
+		  #comprobamos si se updatea segun si se envio o no password
+    	  successfully_updated = ( needs_password?(@user, usuario_params) ) ? @user.update(usuario_params): @user.update_without_password(usuario_params)
+
+
 	      respond_to do |format|
-	        if @user.update(usuario_params)
+	        if successfully_updated
 	          format.html { redirect_to backoffice_usuarios_path, notice: 'Usuario modificado con exito.' }
 	          format.json { render :show, status: :ok, location: @user }
 	        else
@@ -65,6 +77,11 @@ module Backoffice
 	      def set_usuario
 	        @user = Usuario.find(params[:id])
 	      end
+
+		  def needs_password?(user, params)
+		    params[:password].present?
+		  end
+
 
 	      # Never trust parameters from the scary internet, only allow the white list through.
 	      def usuario_params
