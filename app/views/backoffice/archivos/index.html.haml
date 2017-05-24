@@ -1,0 +1,23 @@
+%h1 Listing archivos
+
+%table
+  %thead
+    %tr
+      %th Aseguradora
+      %th Image
+      %th
+      %th
+      %th
+
+  %tbody
+    - @archivos.each do |archivo|
+      %tr
+        %td= archivo.aseguradora
+        %td= archivo.image
+        %td= link_to 'Edit', edit_backoffice_archivo_path(archivo)
+      
+
+%br
+
+
+= link_to 'New Archivo', new_backoffice_archivo_path

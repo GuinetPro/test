@@ -16,4 +16,6 @@
  *= require angular-ui-grid/ui-grid.min.css
  *= require_self
  *= require font-awesome
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
  */

@@ -4,6 +4,7 @@ json.array!(@productos) do |pro|
 	  json.url_compra pro.url_compra
   	json.precio pro.precio
     json.activado pro.activado
+    json.proximo pro.proximo
   	json.url_poliza pro.url_poliza
 	  json.tipovehiculo  pro.tipovehiculo.nombre
 	  json.tipoproducto  pro.tipoproducto.nombre

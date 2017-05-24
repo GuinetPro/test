@@ -1,0 +1,26 @@
+= form_for ["backoffice",@pagina] do |f|
+  - if @pagina.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@pagina.errors.count, "error")} prohibited this pagina from being saved:"
+      %ul
+        - @pagina.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre ,class: "form-control"
+  .form-group
+    = f.label :campana
+    %br/
+    = f.select(:campana_id, @campana.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Tipo Campaña'}, { :class => 'form-control' })
+  .form-group
+    = f.label :tipovehiculo
+    %br/
+    = f.select(:tipovehiculo_id, @tipovehiculo.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige un Tipo de Vehiculo'}, { :class => 'form-control' })
+  .form-group
+    = f.label :my_app
+    %br/
+    = f.select(:my_app_id, @my_app.all.collect {|a| [a.titulo, a.id]},{multiple:  false,include_blank: 'Elige una App'}, { :class => 'form-control' })  
+  .form-group
+    = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"

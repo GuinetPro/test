@@ -127,7 +127,12 @@ body.fondo-login {
 }
 .filtros .btn-group .btn.btn-default:first-child {
   text-align: left;
-  width: 210px;
+  width: 155px;
+font-size: 12px !important;
+}
+
+.btn-group2{
+  width: 130px !important;
 }
 
 .productos-filtrados {

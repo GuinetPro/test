@@ -1,5 +1,5 @@
-%p.alert.alert-success{:role => "alert", :style => "#{"display:none;" if notice.nil?}"}= notice
-%p.alert.alert-danger{:role => "alert", :style => "#{"display:none;" if alert.nil?}"}= alert
+%button.btn.btn-primary.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+  Editor Masivo
 %h1 Lista de Productos
 %p
   Descargar:
@@ -7,6 +7,73 @@
   \#{link_to "Excel", backoffice_productos_path(format: "xls")}
 - if current_usuario.perfil == "admin"
   = link_to "Nuevo Producto" , new_backoffice_producto_path , :class => "btn btn-success"
+  = link_to "Nuevo Producto" , new_backoffice_producto_path , :class => "btn btn-success"
+  
 %div{"ng-app" => "MyApp"}
   %div{"ng-controller" => "ListadoCtrl"}
     %div{"ui-grid-pagination " =>"","id"=>"grid1" ,"ui-grid"=>"gridOptions" ,"ui-grid-edit"=>"", "ui-grid-cellNav"=>"", "class"=>"grid"}
+    %p.alert.alert-success{:role => "alert", :style => "#{"display:none;" if notice.nil?}"}= notice
+    %p.alert.alert-danger{:role => "alert", :style => "#{"display:none;" if alert.nil?}"}= alert
+    #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"}
+            %h4#myModalLabel.modal-title Editor masivo
+          .modal-body
+            %form.form-editorMasivo
+              .row
+                %div.col-md-10.aseguradora_content
+                  %label{:for => "aseguradora_id"} Aseguradora
+                  %select.form-control{'name' => "data[aseguradora][]"}
+                    %option{:value => ""}
+                    = @aseguradoras.each do |p|
+                      %option{:value => "#{p.id}"}= p.nombre          
+                %div.col-md-2{ :style => "padding-top:25px"}
+                  %span.btn.btn-info{'ng-click' => "agregarAseguradora()"}
+                    %i.fa.fa-plus-square  
+              .row
+                %div.col-md-10.campana_content
+                  %label{:for => "campana_id"} Campana
+                  %select.form-control{'name' => "data[campana][]"}
+                    %option{:value => ""}
+                    = @campanas.each do |p|
+                      %option{:value => "#{p.id}"}= p.nombre
+                %div.col-md-2{ :style => "padding-top:25px"}
+                  %span.btn.btn-info{'ng-click' => "agregarCampana()"}
+                    %i.fa.fa-plus-square 
+              .row
+                %div.col-md-10.tipovehiculo_content
+                  %label{:for => "tipovehiculo_id"} Tipo Vehiculo
+                  %select.form-control{'name' => "data[tipovehiculo][]"}
+                    %option{:value => ""}
+                    = @tipovehiculo.each do |p|
+                      %option{:value => "#{p.id}"}= p.nombre
+                %div.col-md-2{ :style => "padding-top:25px"}
+                  %span.btn.btn-info{'ng-click' => "tipoVehiculo()"}
+                    %i.fa.fa-plus-square 
+              .rows
+                .col-md-6
+                  .form-group
+                    %label{:for => "url_compra"} URL Compra
+                    %input#url_compra.form-control{:name => "url_compra", :type => "text"}/
+                .col-md-6
+                  .form-group
+                    %label{:for => "url_poliza"} URL Poliza
+                    %input#url_poliza.form-control{:name => "url_poliza", :type => "text"}/
+              .rows
+                .col-md-6
+                  .form-group
+                    %label{:for => "precio"} Precio
+                    %input#precio.form-control{:name => "precio", :type => "text"}/
+                .col-md-6
+                  .form-group
+                    %label{:for => "destacado_id"} Destacado
+                    %select#destacado_id.form-control{:disabled => "disabled", :name => "destacado_id"}
+                      %option{:value => ""}
+                      = @destacados.each do |p|
+                        %option{:value => "#{p.id}"}= p.nombre
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cerrar
+            %button.btn.btn-primary{:onclick => "editorMasivo(event)", :type => "button"} Guardar

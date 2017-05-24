@@ -22,7 +22,7 @@
       - @precioAtributo.each do |v|
         %div{:class => "row pre pre-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[pre][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[pre][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[pre][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -44,7 +44,7 @@
       - @compraAtributo.each do |v|
         %div{:class => "row compraAtributo compraAtributo-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[compraAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[compraAtributo][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[compraAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -66,7 +66,7 @@
       - @polizaAtributo.each do |v|
         %div{:class => "row polizaAtributo polizaAtributo-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[polizaAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[polizaAtributo][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[polizaAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -87,7 +87,7 @@
       - @tipovehiculoAtributo.each do |v|
         %div{:class => "row tipovehiculoAtributo tipovehiculoAtributo-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[tipovehiculoAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[tipovehiculoAtributo][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[tipovehiculoAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -108,7 +108,7 @@
       - @tipoproductoAtributo.each do |v|
         %div{:class => "row tipoproductoAtributo tipoproductoAtributo-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[tipoproductoAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[tipoproductoAtributo][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[tipoproductoAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -129,7 +129,7 @@
       - @aseguradoraAtributo.each do |v|
         %div{:class => "row aseguradoraAtributo aseguradoraAtributo-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[aseguradoraAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[aseguradoraAtributo][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[aseguradoraAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -150,7 +150,7 @@
       - @destacadoAtributo.each do |v|
         %div{:class => "row destacadoAtributo destacadoAtributo-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[destacadoAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[destacadoAtributo][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[destacadoAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -174,7 +174,7 @@
       - @vigenciaAtributo.each do |v|
         %div{:class => "row vigenciaAtributo vigenciaAtributo-row#{contador}"}
           .col-md-3
-            %input.form-control{:name => "producto[vigenciaAtributo][llave][#{contador}]", :placeholder => "llave", :type => "text", :value => "#{v.llave}"}/
+            %input.form-control{:name => "producto[vigenciaAtributo][llave][#{contador}]", :placeholder => "condicion", :type => "text", :value => "#{v.llave}"}/
           .col-md-4
             %input.form-control{:name => "producto[vigenciaAtributo][valor][#{contador}]", :placeholder => "valor", :type => "text", :value => "#{v.valor}"}/
           .col-md-2
@@ -186,5 +186,10 @@
       %label
         = f.check_box :activado
         Activado
+  .form-group
+    .checkbox
+      %label
+        = f.check_box :proximo
+        Proximo
   .form-group
     = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"

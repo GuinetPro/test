@@ -4,6 +4,7 @@ u.save
 
 rake db:schema:load
 
+JLgUkFQcR9
 
 111111111-1
 editor@editor.cl
@@ -68,3 +69,7 @@ http://askubuntu.com/questions/113544/how-can-i-reduce-the-file-size-of-a-scanne
 
 
 ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEApi2ej0BVc0xZfqQrWagYVCjZKPGFY8MCEiljmdL4CRT/NHiNm6jWuSmYAQdVP2pGJ7x3ltUXZlSfDkfZFZsQQDrHhfTNgdd72SFxgAzi5PX+QMLw0i9oTF7416E5pkGUA6dQebRSBarFzzHF3tug4zA8pi275P+shZdMcBsuafsaKgdpPe0tFANVSFYyaHlNH9BYwRDRPXGiElf5czwxu+fA7YBhbbE+PcHzngnPlNVf5kAIJxJWXuvbu6rZwBp0QibY380kYI7RursZK80zQXReovD5ab4H9YCMYlGORKHQu295gmOVNtrPJ5fQRG3xP7+dXaKTSLANoa53S/I9Ww== rsa-key-20160819
+
+
+
+rails generate migration add_proximo_to_productos proximo:boolean

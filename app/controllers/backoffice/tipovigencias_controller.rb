@@ -5,7 +5,7 @@ module Backoffice
     # GET /tipos_vigencia
     # GET /tipos_vigencia.json
     def index
-      @tipos_vigencia = Tipovigencia.page(params[:page]).per(10) 
+      @tipos_vigencia = Tipovigencia.order("orden ASC").page(params[:page]).per(10) 
     end
 
     # GET /tipos_vigencia/1
@@ -75,7 +75,7 @@ module Backoffice
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def tipovigencia_params
-        params.require(:tipovigencia).permit(:nombre)
+        params.require(:tipovigencia).permit(:nombre,:orden)
       end
   end
 end

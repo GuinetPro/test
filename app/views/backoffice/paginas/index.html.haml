@@ -1,0 +1,21 @@
+%p.alert.alert-success{:role => "alert", :style => "#{"display:none;" if notice.nil?}"}= notice
+%p.alert.alert-danger{:role => "alert", :style => "#{"display:none;" if alert.nil?}"}= alert
+%h1 Lista de Paginas
+- if current_usuario.perfil == "admin"
+  = link_to "Nueva Pagina" , new_backoffice_pagina_path , :class => "btn btn-success"
+%table.table
+  %thead
+    %tr
+      %th Nombre
+      %th
+      %th
+      %th
+
+  %tbody
+    - @paginas.each do |pagina|
+      %tr
+        %td= pagina.nombre
+        %td= link_to 'Edit', edit_backoffice_pagina_path(pagina)
+        %td= link_to 'Destroy', backoffice_pagina_path(pagina), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br

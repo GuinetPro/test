@@ -1,15 +1,47 @@
 class Api::V1::ProductosController < Api::V1::MasterApiController
 	
-	def index
+    def index
     
-    @productos = Producto.where(activado: true,tipovehiculo: params[:vehiculo], tipoproducto: params[:producto] ).order('destacado_id IS NULL ASC , precio  IS NULL ASC, precio ASC')
+           if ( params[:producto].present? && params[:aseguradora].present? && params[:vehiculo].present?)
+
+  		@productos = Producto.where( activado: true,
+  									 aseguradora: params[:aseguradora].to_i , 
+  									 tipoproducto: params[:producto].to_i ,
+  									 tipovehiculo: params[:vehiculo].to_i
+  									 ).order('destacado_id IS NULL ASC , precio  IS NULL ASC, precio ASC')
+
+	  elsif ( params[:aseguradora].present? && params[:producto].present? )
+
+		@productos = Producto.where( activado: true,
+									 aseguradora: params[:aseguradora].to_i, 
+									 tipoproducto: params[:producto].to_i 
+								   ).order('destacado_id IS NULL ASC , precio  IS NULL ASC, precio ASC')
+      elsif ( params[:vehiculo].present? && params[:producto].present?)
+             @productos = Producto.where(activado: true , tipoproducto: params[:producto].to_i ,tipovehiculo: params[:vehiculo].to_i).order('destacado_id IS NULL ASC , precio  IS NULL ASC, precio ASC')
+
+      elsif  params[:aseguradora].present?
+   
+        @productos = Producto.where( activado: true,
+        	 						 aseguradora: params[:aseguradora].to_i 
+        	 						 ).order('destacado_id IS NULL ASC , precio  IS NULL ASC, precio ASC')
+   
+      elsif  params[:producto].present?
+      	
+      	@productos = Producto.where( activado: true,
+      							     tipoproducto: params[:producto].to_i 
+      							    ).order('destacado_id IS NULL ASC , precio  IS NULL ASC, precio ASC')
+      
+      else
+      	@productos = Producto.where(activado: true).order('destacado_id IS NULL ASC , precio  IS NULL ASC, precio ASC')
+      
+      end 
     
     @attr = []
 
-    respond_to do |format|
-	    format.html { redirect_to(backoffice_productos_path) }
-	    format.json 
-	  end
+ #   respond_to do |format|
+#	    format.html { redirect_to(backoffice_productos_path) }
+#	    format.json @productos
+#	  end
 
   end
 

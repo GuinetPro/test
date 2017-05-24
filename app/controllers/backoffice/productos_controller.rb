@@ -7,8 +7,12 @@ module Backoffice
     # GET /productos
     # GET /productos.json
     def index
-      @productos = Producto.page(params[:page]).per(10) 
+      @productos = Producto.all
+      @aseguradoras = Aseguradora.all
+      @campanas = Campana.all
       @proExcel = Producto.all
+      @destacados = Destacado.all
+      @tipovehiculo  = Tipovehiculo.all
       # damos la posibildiad segun formato por request
       # entregar html o csv o xls
       respond_to do |format|
@@ -79,6 +83,74 @@ module Backoffice
     end
 
     # POST /productos
+    def editor_masivo
+
+      contador = 0;
+
+      params["data"]["aseguradora"].each do |valor|
+  
+          @productos = Producto.select("productos.id,productos.precio")
+                      .joins('INNER JOIN aseguradoras  ON aseguradoras.id=productos.aseguradora_id')
+                      .joins('INNER  JOIN tienevigencias  ON productos.id = tienevigencias.producto_id')
+                      .joins('INNER  JOIN vigencias  ON vigencias.id = tienevigencias.vigencia_id')
+                      .where('aseguradora_id  = ? AND vigencias.campana_id =  ?', valor,
+                        params["data"]["campana"][contador].to_i)
+
+          if !params["data"]["tipovehiculo"][contador].blank?
+          
+              @productos = Producto.select("productos.id,productos.precio")
+                .joins('INNER JOIN aseguradoras  ON aseguradoras.id=productos.aseguradora_id')
+                .joins('INNER  JOIN tienevigencias  ON productos.id = tienevigencias.producto_id')
+                .joins('INNER  JOIN vigencias  ON vigencias.id = tienevigencias.vigencia_id')
+                .where('productos.aseguradora_id  = ? AND vigencias.campana_id =  ? AND productos.tipovehiculo_id =?', 
+                valor,params["data"]["campana"][contador],params["data"]["tipovehiculo"][contador].to_i)
+          end
+
+
+          @vigencias = Vigencia.where(campana_id: params["data"]["campana"][contador].to_i)
+
+          contador += 1;
+
+
+          @productos.each do |p|
+            @producto = Producto.find(p.id)
+            
+            if !params[:precio].blank?
+              @producto.precio = params[:precio]
+            end
+
+            if !params[:url_compra].blank?
+
+              @producto.url_compra = params[:url_compra]
+            end
+      
+            if !params[:url_poliza].blank?
+              @producto.url_poliza = params[:url_poliza]
+            end
+
+            if !params[:tipovehiculo_id].blank?
+              @producto.url_poliza = params[:destacado_id]
+            end 
+                        
+            @producto.save
+
+            @vigencias.each do |v|
+              Tienevigencia.create(producto_id:p.id,vigencia_id:v.id)
+            end
+
+
+          end
+
+      end 
+
+      respond_to do |format|
+            format.json { render json: { "mensaje" => "Efectuado editor masivo"}, status: :ok }
+       end
+
+    end
+
+
+    # POST /productos
     # POST /productos.json
     def create
 
@@ -135,7 +207,18 @@ module Backoffice
 
     # DELETE /productos/1
     # DELETE /productos/1.json
-    def destroy
+  def destroy
+  
+    @a =  Atributo.where( producto_id: @producto.id)
+    @a.each do |o|
+      o.delete
+    end
+  
+    @t = Tienevigencia.where(producto_id:@producto.id)
+    @t.each do |o|
+     o.delete
+    end
+  
       @producto.destroy
       respond_to do |format|
         format.html { redirect_to backoffice_productos_path, notice: 'Producto eliminada con exito.' }
@@ -151,7 +234,7 @@ module Backoffice
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def producto_params
-        params.require(:producto).permit( :precio, :activado, :url_compra, :url_poliza, :tipovehiculo_id, :tipoproducto_id, :aseguradora_id, :destacado_id,:pre,:compraAtributo,:polizaAtributo,:tipovehiculoAtributo,:aseguradoraAtributo,:destacadoAtributo,:vigenciaAtributo,:vigencias)
+        params.require(:producto).permit( :precio, :activado, :url_compra, :url_poliza, :tipovehiculo_id, :tipoproducto_id, :aseguradora_id, :destacado_id,:pre,:compraAtributo,:polizaAtributo,:tipovehiculoAtributo,:aseguradoraAtributo,:destacadoAtributo,:vigenciaAtributo,:vigencias,:proximo)
       end
 
       #cargamos los selectores con sus datos
@@ -160,7 +243,7 @@ module Backoffice
         @tipoproducto  = Tipoproducto.all
         @aseguradora   = Aseguradora.all
         @destacado     = Destacado.all
-        @vigencia      = Vigencia.where( activado: true)
+        @vigencia      = Vigencia.where( activado: true).order("orden ASC")
       end
 
       #Cargamos los atributos que fueron guardados para desoplegarse en al vista

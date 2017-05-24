@@ -1,0 +1,59 @@
+
+MANTENEDOR
+
+- aseguradora
+
+  Deben tener la posibilidad de mas de una imagen y seleciiona runa por defecto
+  
+  "Edicion masiva" En lista de productos poder cambiar 
+
+   el link Url compra  
+
+     o 
+
+   Url poliza de forma 
+
+   o 
+
+   destacado ademas por vehiculo en este caso
+
+   y 
+
+   precio aswfuradora y tipo de vehiculo
+
+  
+   masiva segun aseguradora y campaña 
+
+
+- Poder ordenar el tipo de vigencia yq ue se despleigue de esa forma al editar un producto
+
+- lista de Productos no aparece el proximamente difuminado
+
+- microdatos 
+  condicion valor con ejemplo 
+
+
+select * from productos
+inner join aseguradoras on (productos.aseguradora_id = aseguradoras.id)
+inner join tienevigencias  on (productos.id = tienevigencias.producto_id)
+
+insert into tienevigencias (producto_id,vigencia_id,created_at,updated_at) values (2,1,'2017-03-03','2017-03-03');
+
+
+
+19-05-2017
+
+
+editor masivo
+
+1- Tanto Tipo Vehiculo y aseguradora poder eelgir ams de una opcion
+
+2 - las paginas debene tener uan relacion campaña, aplicacion y tipo de vehiculo y producto (soap rci ejemplo )
+
+3 - en el mantenedor se debe poder ver los productos por bloque, para dar una idea de como se veria
+ y en la api poder filtrar tb por aseguradora
+
+
+
+
+

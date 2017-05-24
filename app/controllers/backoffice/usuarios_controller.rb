@@ -51,7 +51,7 @@ module Backoffice
 
 	      respond_to do |format|
 	        if successfully_updated
-	          format.html { redirect_to backoffice_usuarios_path, notice: 'Usuario modificado con exito.' }
+	          format.html { redirect_to backoffice_productos_path, notice: 'Usuario modificado con exito.' }
 	          format.json { render :show, status: :ok, location: @user }
 	        else
 	          format.html { render :edit }

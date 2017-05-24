@@ -1,0 +1,34 @@
+!!! XML
+%workbook{:xmlns => "urn:schemas-microsoft-com:office:spreadsheet", "xmlns:html" => "http://www.w3.org/TR/REC-html40", "xmlns:o" => "urn:schemas-microsoft-com:office:office", "xmlns:ss" => "urn:schemas-microsoft-com:office:spreadsheet", "xmlns:x" => "urn:schemas-microsoft-com:office:excel"}
+  %worksheet{"ss:name" => "Sheet1"}
+    %table{"x:fullcolumns" => "1", "x:fullrows" => "1"}
+      %row
+        %cell
+          %data{"ss:type" => "String"} Precio
+        %cell
+          %data{"ss:type" => "String"} Activado
+        %cell
+          %data{"ss:type" => "String"} Vigencia
+        %cell
+          %data{"ss:type" => "String"} Vehiculo
+        %cell
+          %data{"ss:type" => "String"} Producto
+        %cell
+          %data{"ss:type" => "String"} Aseguradora
+      - @proExcel.each do |producto|
+        %row
+          %cell
+            %data{"ss:type" => "String"}= producto.precio
+          %cell
+            %data{"ss:type" => "String"}
+              = (producto.activado) ? "Si" : "No"
+          %cell
+            %data{"ss:type" => "String"}
+              - producto.vigencias.each do |vi|
+                = vi.tipovigencia.nombre
+          %cell
+            %data{"ss:type" => "String"}= producto.tipovehiculo.nombre
+          %cell
+            %data{"ss:type" => "String"}= producto.tipoproducto.nombre
+          %cell
+            %data{"ss:type" => "String"}= producto.aseguradora.nombre

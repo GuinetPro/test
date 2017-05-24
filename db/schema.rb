@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805173938) do
+ActiveRecord::Schema.define(version: 20170522015927) do
+
+  create_table "archivos", force: :cascade do |t|
+    t.integer  "aseguradoras_id"
+    t.string   "image"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "pagina"
+  end
+
+  add_index "archivos", ["aseguradoras_id"], name: "index_archivos_on_aseguradoras_id"
 
   create_table "aseguradoras", force: :cascade do |t|
     t.string   "nombre"
-    t.string   "foto"
+    t.text     "foto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,6 +65,19 @@ ActiveRecord::Schema.define(version: 20160805173938) do
 
   add_index "my_apps", ["usuario_id"], name: "index_my_apps_on_usuario_id"
 
+  create_table "paginas", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "tipovehiculo_id"
+    t.integer  "campana_id"
+    t.integer  "my_app_id"
+  end
+
+  add_index "paginas", ["campana_id"], name: "index_paginas_on_campana_id"
+  add_index "paginas", ["my_app_id"], name: "index_paginas_on_my_app_id"
+  add_index "paginas", ["tipovehiculo_id"], name: "index_paginas_on_tipovehiculo_id"
+
   create_table "productos", force: :cascade do |t|
     t.string   "nombre"
     t.integer  "precio"
@@ -66,8 +89,9 @@ ActiveRecord::Schema.define(version: 20160805173938) do
     t.integer  "tipoproducto_id"
     t.integer  "aseguradora_id"
     t.integer  "destacado_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "proximo",         default: false
   end
 
   add_index "productos", ["aseguradora_id"], name: "index_productos_on_aseguradora_id"
@@ -102,6 +126,7 @@ ActiveRecord::Schema.define(version: 20160805173938) do
     t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "orden"
   end
 
   create_table "tokenes", force: :cascade do |t|
@@ -144,6 +169,7 @@ ActiveRecord::Schema.define(version: 20160805173938) do
     t.integer  "campana_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "orden"
   end
 
   add_index "vigencias", ["campana_id"], name: "index_vigencias_on_campana_id"

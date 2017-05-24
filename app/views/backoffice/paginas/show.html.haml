@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @pagina.nombre
+
+= link_to 'Edit', edit_pagina_path(@pagina)
+\|
+= link_to 'Back', paginas_path

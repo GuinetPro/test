@@ -8,6 +8,10 @@
         - @vigencia.errors.full_messages.each do |message|
           %li= message
   .form-group
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre ,class: "form-control"  
+  .form-group
     = f.label :fecha_desde
     %br/
     = f.text_field :fecha_desde ,class: "form-control date"
@@ -24,6 +28,10 @@
     = f.select(:tipovigencia_id, @tipovigencia.all.collect {|a| [a.nombre, a.id]},{multiple:  false,include_blank: 'Elige una Vigencia'}, { :class => 'form-control' })
   .form-group
     = f.select(:campana_id, @campana.all.collect {|a| [a.nombre, a.id]} ,{multiple:  false,include_blank: 'Elige una Campaña'}, { :class => 'form-control' })
+  .form-group
+    = f.label :orden
+    %br/
+    = f.number_field :orden  ,class: "form-control"   
   .form-group
     = f.submit "Guardar" ,class: "btn btn-success btn-lg btn-block"
 :javascript

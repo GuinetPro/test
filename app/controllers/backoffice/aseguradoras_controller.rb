@@ -20,6 +20,7 @@ module Backoffice
 
     # GET /aseguradoras/1/edit
     def edit
+      @paginas = Pagina.all
     end
 
     # POST /aseguradoras
@@ -68,11 +69,12 @@ module Backoffice
       # Use callbacks to share common setup or constraints between actions.
       def set_aseguradora
         @aseguradora = Aseguradora.find(params[:id])
+
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def aseguradora_params
-        params.require(:aseguradora).permit(:nombre,:foto)
+        params.require(:aseguradora).permit(:nombre, :foto)
       end
   end
 end

@@ -1,0 +1,13 @@
+%p.alert.alert-success{:role => "alert", :style => "#{"display:none;" if notice.nil?}"}= notice
+%p.alert.alert-danger{:role => "alert", :style => "#{"display:none;" if alert.nil?}"}= alert
+%h1 Lista de Productos
+%p
+  Descargar:
+  \#{link_to "CSV", backoffice_productos_path(format: "csv")} |
+  \#{link_to "Excel", backoffice_productos_path(format: "xls")}
+- if current_usuario.perfil == "admin"
+  = link_to "Nuevo Producto" , new_backoffice_producto_path , :class => "btn btn-success"
+  = link_to "Nuevo Producto" , new_backoffice_producto_path , :class => "btn btn-success"
+%div{"ng-app" => "MyApp"}
+  %div{"ng-controller" => "ListadoCtrl"}
+    %div{"ui-grid-pagination " =>"","id"=>"grid1" ,"ui-grid"=>"gridOptions" ,"ui-grid-edit"=>"", "ui-grid-cellNav"=>"", "class"=>"grid"}

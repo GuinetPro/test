@@ -28,7 +28,7 @@ class Producto < ActiveRecord::Base
   after_create   :save_vigencias
   after_update   :save_vigencias
   before_update  :update_vigencias
-  before_destroy :update_vigencias
+#  before_destroy :update_vigencias
 
   #exportacion a excel
   

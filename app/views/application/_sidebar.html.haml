@@ -1,13 +1,6 @@
-.col-md-3.filtros
+.col-md-2.filtros
   .btn-group
     = link_to "PRODUCTOS" , backoffice_productos_path , :class => "btn btn-default"
-    %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-      %span.caret
-      %span.sr-only Toggle Dropdown
-    %ul.dropdown-menu
-      - Tipoproducto.all.each do |t|
-        %li
-          = link_to t.nombre, {:controller => "backoffice/productos", :action => "search", :id => t.id }
   / btn-group
   .btn-group
     = link_to "TIPOS DE PRODUCTOS" , backoffice_tipoproductos_path , :class => "btn btn-default"
@@ -19,7 +12,7 @@
     = link_to "ASEGURADORAS" , backoffice_aseguradoras_path , :class => "btn btn-default"
   / btn-group
   .btn-group
-    = link_to "VIGENCIAS" , backoffice_vigencias_path , :class => "btn btn-default"
+    = link_to "VIGENCIAS" , backoffice_vigencias_path , :class => "btn btn-default btn-group2"
     %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
       %span.caret
       %span.sr-only Toggle Dropdown
@@ -44,4 +37,6 @@
     .btn-group
       = link_to "USUARIOS" , backoffice_usuarios_path , :class => "btn btn-default"
     / btn-group
+  .btn-group
+    = link_to "PAGINAS" , backoffice_paginas_path , :class => "btn btn-default"
 / col-md-3

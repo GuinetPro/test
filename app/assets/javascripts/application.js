@@ -14,8 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require bootstrap-datepicker.min
+//= require jquery-fileupload/basic
 //= require custom
 //= require angular/angular
 //= require angular-ui-grid/ui-grid.min.js
-
 //= require_tree .

@@ -1,4 +1,3 @@
 json.array!(@tipovehiculos) do |tipovehiculo|
-  json.extract! tipovehiculo, :id, :name
-  json.url tipovehiculo_url(tipovehiculo, format: :json)
+  json.extract! tipovehiculo, :id, :nombre
 end

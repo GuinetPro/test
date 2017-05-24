@@ -1,0 +1,16 @@
+= form_for ["backoffice",@archivo] do |f|
+  - if @archivo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@archivo.errors.count, "error")} prohibited this archivo from being saved:"
+      %ul
+        - @archivo.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :aseguradora
+    = f.text_field :aseguradora
+  .field
+    = f.label :image
+    = f.text_field :image
+  .actions
+    = f.submit 'Save'

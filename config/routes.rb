@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+  
   root to: 'backoffice/productos#index'
   #devise_for :usuarios
 
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :productos
       get '/search' => "productos#search"
+      
+      
     end
   end
 
@@ -23,12 +27,15 @@ Rails.application.routes.draw do
     resources :vigencias
     resources :my_apps
     resources :usuarios
+    resources :archivos
+    resources :paginas
     #buscador
     get '/productos/search/:id'      => "productos#search"
     get '/vigencias/search/:id'      => "vigencias#search"
     #rutas para duplicar
     get '/productos/duplicate/:id'     => "productos#duplicate"
-
+    
+    post '/productos/editor_masivo/:aseguradora_id/:campana_id' => "productos#editor_masivo"
   end
 
 end

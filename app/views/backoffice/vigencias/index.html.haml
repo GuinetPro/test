@@ -10,6 +10,7 @@
       %th Fecha hasta
       %th Activado
       %th Tipovigencia
+      %th Orden
       %th Campaña
       %th{:colspan => "3"}
   %tbody
@@ -20,6 +21,7 @@
         %td
           = (vigencia.activado) ? "Si" : "No"
         %td= vigencia.tipovigencia.nombre
+        %td= vigencia.orden
         %td= vigencia.campana.nombre
         - if current_usuario.perfil == "admin"
           %td= link_to 'Editar', edit_backoffice_vigencia_path(vigencia)

@@ -86,7 +86,7 @@ module Backoffice
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def vigencia_params
-        params.require(:vigencia).permit(:fecha_desde, :fecha_hasta, :activado, :tipovigencia_id, :campana_id)
+        params.require(:vigencia).permit(:fecha_desde, :fecha_hasta, :activado, :tipovigencia_id, :campana_id, :nombre,:orden)
       end
   end
 end

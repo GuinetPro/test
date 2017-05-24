@@ -7,13 +7,17 @@
     :javascript
        Perfil = "#{current_usuario.perfil}"
        isEditor = (Perfil == 'editor')?true:false
+       Base = "#{root_url}"
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    =# javascript_include_tag "http://localhost:3000/uploads/listaProductosApp.js"
     = csrf_meta_tags
+    :css
+      .ui-grid { height: 750px !important }
   %body
     = render("nav")
     .container{:style => "margin-top: 70px;"}
       = render("sidebar")
-      .col-md-9.productos-filtrados
+      .col-md-10.productos-filtrados
         = yield

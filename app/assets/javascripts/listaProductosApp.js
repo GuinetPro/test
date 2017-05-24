@@ -12,31 +12,33 @@ app.controller('ListadoCtrl', function ($scope,$http) {
 
     $scope.myData =  [];
 
-   //configuramos al grilla
-
     $scope.gridOptions = {};
     $scope.gridOptions.paginationPageSizes = [20, 25, 100],
     $scope.gridOptions.paginationPageSize = 20,
-
-     //$scope.gridOptions.data =   $scope.myData ;
-console.log(isEditor);
     $scope.gridOptions.enableFiltering= true;
-
     $scope.gridOptions.enableCellEditOnFocus = true ;
 
     $scope.gridOptions.columnDefs = [
-         { name: 'precio' ,displayName: 'Precio', enableCellEdit: false,enableFiltering: false},
-         { name: 'activado',displayName: 'activado', enableCellEdit: false,enableFiltering: false },
-         { name: 'tipovehiculo',displayName: 'Vehiculo', enableCellEdit: false},
-         { name: 'tipoproducto',displayName: 'Producto', enableCellEdit: false,},
-         { name: 'aseguradora',displayName: 'Aseguradora', enableCellEdit: false, },
-         { name: 'campana',displayName: 'Campaña', enableCellEdit: false, },
-         { name: 'vigencia',displayName: 'Vigencia', enableCellEdit: false, },
+         { name: 'precio', width: '8%' ,displayName: 'Precio', enableCellEdit: false,enableFiltering: false},
+         { name: 'activado',displayName: 'Act', 
+         enableCellEdit: false,
+         enableFiltering: false
+         , width: '5%' },
+             { name: 'proximo',displayName: 'Proximo', 
+         enableCellEdit: false,
+         enableFiltering: false
+         , width: '5%' },
+         { name: 'tipovehiculo', width: '15%',displayName: 'Vehiculo', enableCellEdit: false},
+         { name: 'tipoproducto' , width: '7%',displayName: 'Producto', enableCellEdit: false,},
+         { name: 'aseguradora'
+         , width: '16%' ,displayName: 'Aseguradora', enableCellEdit: false, },
+         { name: 'campana', width: '11%' ,displayName: 'Campaña', enableCellEdit: false, },
+         { name: 'vigencia', width: '22%' ,displayName: 'Vigencia', enableCellEdit: false, },
          { name: 'Opciones',
             enableFiltering: false,
             enableCellEdit: false,
-            width: '20%',
-            cellTemplate:( Perfil == "admin" )?'<a  href="/backoffice/productos/{{row.entity.id}}/edit">Editar</a>  <a data-confirm="Realmente deseas eliminar este dato?" rel="nofollow" data-method="delete" href="/backoffice/productos/{{row.entity.id}}">Eliminar</a>  <a  href="productos/duplicate/{{row.entity.id}}">Clonar</a>':'<a ng-show="'+isEditor+'" href="productos/{{row.entity.url}}/edit">Editar</a>' 
+            width: '16%',
+            cellTemplate:( Perfil == "admin" )?'<a  href="/backoffice/productos/{{row.entity.id}}/edit">Editar</a>  <a data-confirm="Realmente deseas eliminar este dato?" rel="nofollow" data-method="delete" href="/backoffice/productos/{{row.entity.id}}">Eliminar</a>  <a  href="/backoffice/productos/duplicate/{{row.entity.id}}">Clonar</a>':'<a ng-show="'+isEditor+'" href="/backoffice/productos/{{row.entity.id}}/edit">Editar</a>' 
          },
        ];
 
@@ -47,7 +49,8 @@ console.log(isEditor);
         .success(function(response) {
 
         for(i = 0; i < response.length; i++){
-     	   response[i].activado = (response[i].activado)?"Si":"No";	
+           response[i].activado = (response[i].activado)?"Si":"No"; 
+           response[i].proximo = (response[i].proximo)?"Si":"No"; 
            response[i].campana  = response[i].vigencia[0].campana;
            response[i].vigencia = response[i].vigencia[0].vigencia;
         }
@@ -68,12 +71,103 @@ console.log(isEditor);
       };
 
     $scope.buttonClick = function(value) {
-        //alert('Name: ' + value);
         window.location = Base+"app/editPaso1/"+value;
-
     };
+
+    $scope.agregarAseguradora  = function() {
+      var $button = $('#aseguradora_id').clone();
+      $('.aseguradora_content').append($button);
+    };
+
+    $scope.agregarCampana= function() {
+      var $button = $('#campana_id').clone();
+      $('.campana_content').append($button);
+    };
+
+
+    $scope.tipoVehiculo= function() {
+      var $button = $('#tipovehiculo_id').clone();
+      $('.tipovehiculo_content').append($button);
+    };
+    
+
 
 });
 
 
 
+
+
+app.controller('ListadoTipoVehiculoCtrl', function ($scope,$http) {
+ 
+
+    $scope.myData =  [];
+
+   //configuramos al grilla
+
+    $scope.gridOptions = {};
+    $scope.gridOptions.paginationPageSizes = [20, 25, 100],
+    $scope.gridOptions.paginationPageSize = 20,
+
+     //$scope.gridOptions.data =   $scope.myData ;
+
+    $scope.gridOptions.enableFiltering= true;
+
+    $scope.gridOptions.enableCellEditOnFocus = true ;
+
+    $scope.gridOptions.columnDefs = [
+         { name: 'id' ,displayName: 'Id', enableCellEdit: false},
+         { name: 'nombre',displayName: 'Nombre', enableCellEdit: false,},
+         { name: 'Opciones',
+            enableFiltering: false,
+            enableCellEdit: false,
+            cellTemplate:( Perfil == "admin" )?'<a  href="/backoffice/tipovehiculos/{{row.entity.id}}/edit">Editar</a>  <a data-confirm="Realmente deseas eliminar este dato?" rel="nofollow" data-method="delete" href="/backoffice/tipovehiculos/{{row.entity.id}}">Eliminar</a>  ' :'<a  href="/backoffice/tipovehiculos/{{row.entity.id}}/edit">Editar</a>',
+         },
+       ];
+
+
+
+     // buscamos los resultados
+    $http.get('/backoffice/tipovehiculos.json')
+        .success(function(response) {
+
+       $scope.gridOptions.data = response;          
+    });
+
+    $scope.gridOptions.onRegisterApi = function(gridApi) {
+
+        $scope.gridApi = gridApi;
+
+        gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue) {
+
+    
+        });
+
+      };
+
+
+
+});
+
+
+
+function editorMasivo(e){
+
+    e.preventDefault();
+
+    if( $("select[name='data[aseguradora][]'").length == 0  ||  $("select[name='data[campana][]'").length == 0){
+
+        alert('Debes elegir una Aseguradora y una Campaña');
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: Base+"backoffice/productos/editor_masivo/",
+        data: $('.form-editorMasivo').serialize(), // serializes the form's elements.
+        success: function(){
+            window.location = Base +"backoffice/productos/" ;// show response from the php script.
+        }
+    });
+
+}

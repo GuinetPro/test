@@ -1,0 +1,79 @@
+<h1>Editar Aseguradora</h1>
+<%= link_to "Volver" ,  backoffice_aseguradoras_path , :class => "btn btn-info" %>
+<%= form_for ["backoffice",@aseguradora], html: { :multipart  => true ,:id => 'student_form' }  do |f| %>
+  <% if @aseguradora.errors.any? %>
+    <div class="alert alert-warning">
+      <h2>
+        <%= pluralize(@aseguradora.errors.count, "error") %>
+        Al Intentar Guardar Aseguradora f:
+      </h2>
+      <ul>
+        <% @aseguradora.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :nombre %>
+    <br/>
+    <%= f.text_field :nombre ,class: "form-control" %>
+  </div>
+  
+  <br/>
+  <div class="form-group">
+    <%= f.submit "Editar Datos Aseguradora" ,class: "btn btn-success btn-lg btn-block" %>
+  </div>
+  <div id="div">
+   <% end %> 
+
+
+  
+<h4>Imagenes Guardadas</h4>
+
+
+<div class="row">
+  <% @aseguradora.archivo.each do |a| %> 
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag a.image_url, :size => "260x180"%>
+      <div class="caption">
+        <select  class="form-control" name="" id="" disabled="">
+          <% @paginas.each do |p| %>
+            <option <% if a.pagina  == p.id %> selected='selected' <% end %>><%= p.nombre %></option>
+          <% end %>
+        </select>
+      </div>
+      <%= link_to 'Eliminar', backoffice_archivo_path(a), method: :delete, class:'btn btn-warning',data: { confirm: 'Realmente deseas eliminar este dato?' }%>
+      
+    </div>
+  </div>
+  <% end %> 
+</div>
+
+
+<form action="" id="FormArchivo">
+  <h4>Ingresar Imagenes</h4>
+
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="hidden" value="<%= @aseguradora.id %>"  name="aseguradora" id="aseguradora">
+  
+  <input   name="image" id="image" type="file"></input>
+  <br>
+   <% @paginas.each do |p| %>
+    <label class="radio-inline">
+        <input type="radio" name="pagina" value="<%= p.id %>"> <%= p.nombre %>
+    </label>
+  <% end %>
+
+  <br>
+  <br>
+  <span onclick="guardarArchivo(event)" class="btn btn-info">Guardar Archivo</span>
+</form>
+
+<div>
+  
+</div>
+

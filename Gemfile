@@ -23,7 +23,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'bcrypt', '~> 3.1.11'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -35,7 +35,7 @@ group :development, :test do
   gem 'byebug'
   gem "better_errors"
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+  #gem 'sqlite3',  '1.3.11'
 
 end
 
@@ -55,14 +55,17 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
+gem 'sqlite3-ruby'
 # gemas  para la aplicacion
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
-gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave', '~> 1.0'
+#gem 'carrierwave', '~> 0.11.2'
+#gem 'paperclip'
 gem 'mini_magick'
 gem 'hirb'
 gem "haml-rails", "~> 0.9"
+gem "jquery-fileupload-rails"
